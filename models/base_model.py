@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Defines a base model class."""
-import uuid
-from models import storage
+from uuid import uuid4
 from datetime import datetime
 
 
@@ -21,37 +20,33 @@ class BaseModel:
         """
         if kwargs and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key == "id":
-                    self.id = value
-                elif key == "created_at":
-                    self.created_at = datetime.fromisoformat(value)
-                elif key == "updated_at":
-                    self.updated_at = datetime.fromisoformat(value)
-                elif key == "name":
-                    self.name = value
-                elif key == "my_number":
-                    self.my_number = value
+                if key != '__class__':
+                    if key in ('created_at', 'updated_at'):
+                        setattr(self, key, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            from models import storage
+            self.id = str(uuid4())
+            self.created_at = self.updated_at = datetime.now()
             storage.new(self)
 
     def __str__(self):
         """Return the print() and str() representation the basemodel."""
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """updates the updated_at with the current datetime."""
+        from models import storage
         self.updated_at = datetime.now()
-        # storage.save()
+        storage.save()
 
     def to_dict(self):
         """Return the dictionary representation of the basemodel."""
-        self_dict = self.__dict__
-        self_dict["__class__"] = type(self).__name__
-        self_dict["created_at"] = str(datetime
-                                      .isoformat(self.created_at))
-        self_dict["updated_at"] = str(datetime
-                                      .isoformat(self.updated_at))
-        return self_dict
+        dict_1 = self.__dict__.copy()
+        dict_1["__class__"] = self.__class__.__name__
+        for k, v in self.__dict__.items():
+            if k in ("created_at", "updated_at"):
+                v = self.__dict__[k].isoformat()
+                dict_1[k] = v
+        return dict_1
