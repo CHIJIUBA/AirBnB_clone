@@ -1,18 +1,13 @@
-import uuid
-import datetime
-# # Printing random id using uuid4()
-# today = datetime.datetime.now()
-# today = datetime.datetime.isoformat(today)
-# print(today)
+import json
 
-def greet_me(**kwargs):
-    if kwargs is not None:
-        for key, value in kwargs.items():
-            if value == "Enugu":
-                continue
-            print("{} == {}".format(key, value))
+all_objs = {"BaseModel.f26e97b7-feef-40e8-9223-d92f0fd55657": {"id": "f26e97b7-feef-40e8-9223-d92f0fd55657", "created_at": "2022-09-01T20:28:23.517539", "updated_at": "2022-09-01T20:28:23.517539", "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"},
+            "BaseModel.f26e97b7-feef-40e8-9223-d92f0fd55655": {"id": "f26e97b7-feef-40e8-9223-d92f0fd55657", "created_at": "2022-09-01T20:28:23.517539", "updated_at": "2022-09-01T20:28:23.517539", "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"},
+            "BaseModel.f26e97b7-feef-40e8-9223-d92f0fd55656": {"id": "f26e97b7-feef-40e8-9223-d92f0fd55657", "created_at": "2022-09-01T20:28:23.517539", "updated_at": "2022-09-01T20:28:23.517539", "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"}}
 
 
-if __name__ == "__main__":
-    # dicto = {name = 'chijiuba', age:17, school:'UNN', state:'Enugu'}
-    greet_me(name = 'chijiuba', age = 17, school = 'UNN', state = 'Enugu')
+for obj_id in all_objs.keys():
+    obj = all_objs[obj_id]
+    print(obj)
+    
+with open('file.json', mode="w") as f:
+    json.dump(all_objs, f)
