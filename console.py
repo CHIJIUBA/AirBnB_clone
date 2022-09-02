@@ -152,11 +152,11 @@ class HBNBCommand(cmd.Cmd):
         print('** no instance found **')
     
     def do_all(self, line):
-        """Prints a string representation of an instance.
+        """Prints a string representation of all instance.
 
         Args:
             line(line): to enter with command <class name> <id>
-            Example: 'show User 1234-1234-1234'
+            Example: 'all BaseModel 1234-1234-1234'
 
         """
         args = line.split(" ")
@@ -171,11 +171,10 @@ class HBNBCommand(cmd.Cmd):
         lis = []
         for obj_id in all_objs.keys():
             lis.append(str(all_objs[obj_id]))
-            # if obj_id == args[0]+'.'+args[1]:
-            #     obj = all_objs[obj_id]
-            #     print(obj)
-            #     return False
         print(lis)
+    
+    def do_update(self, line):
+        pass
     
             
 
