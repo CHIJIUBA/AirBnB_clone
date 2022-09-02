@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """
-The console v: 0.0.1
+The console for AirBnb project
 Contains the entry point of the command interpreter
 """
 import cmd
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -44,7 +45,49 @@ class HBNBCommand(cmd.Cmd):
         Eliminates empty lines
         """
         pass
+    def do_create(self, line):
+        """Creates a new instance of @cls_name class,
+        and prints the new instance's ID.
 
+        Args:
+            line(args): Arguments to enter with command: <class name>
+            Example: 'create User'
+
+        """
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        """
+        args[0] contains class name, create new instance
+        of that class updates 'updated_at' attribute,
+        and saves into JSON file
+        """
+        obj = eval(args[0])()
+        obj.save()
+        print(obj.id)
+    
+    def do_show(self, line):
+        """Prints a string representation of an instance.
+
+        Args:
+            line(line): to enter with command <class name> <id>
+            Example: 'show User 1234-1234-1234'
+
+        """
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        elif  len(args) != 2:
+            print("** instance id missing **")
+            return False
 
 if __name__ == '__main__':
     cli = HBNBCommand()
