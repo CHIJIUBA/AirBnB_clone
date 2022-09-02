@@ -3,6 +3,7 @@
 The console for AirBnb project
 Contains the entry point of the command interpreter
 """
+from ast import arg
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -90,12 +91,92 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
         
-        args = line.split()
-        d = storage.all()
-        if args[1][0] == '"':
-            args[1] = args[1].replace('"', "")
-        key = args[0] + '.' + args[1]
-        print(d[key])
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            if obj_id == args[0]+'.'+args[1]:
+                obj = all_objs[obj_id]
+                print(obj)
+                return False
+        print('** no instance found **')
+    
+    def do_create(self, line):
+        """Creates a new instance of @cls_name class,
+        and prints the new instance's ID.
+
+        Args:
+            line(args): Arguments to enter with command: <class name>
+            Example: 'create User'
+
+        """
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        """
+        args[0] contains class name, create new instance
+        of that class updates 'updated_at' attribute,
+        and saves into JSON file
+        """
+        obj = eval(args[0])()
+        obj.save()
+        print(obj.id)
+    
+    def do_destroy(self, line):
+        """Prints a string representation of an instance.
+
+        Args:
+            line(line): to enter with command <class name> <id>
+            Example: 'show User 1234-1234-1234'
+
+        """
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        elif  len(args) != 2:
+            print("** instance id missing **")
+            return False
+        
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            if obj_id == args[0]+'.'+args[1]:
+                storage.all().pop(obj_id)
+                storage.save()
+                return False
+        print('** no instance found **')
+    
+    def do_all(self, line):
+        """Prints a string representation of an instance.
+
+        Args:
+            line(line): to enter with command <class name> <id>
+            Example: 'show User 1234-1234-1234'
+
+        """
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        
+        all_objs = storage.all()
+        lis = []
+        for obj_id in all_objs.keys():
+            lis.append(str(all_objs[obj_id]))
+            # if obj_id == args[0]+'.'+args[1]:
+            #     obj = all_objs[obj_id]
+            #     print(obj)
+            #     return False
+        print(lis)
+    
             
 
 if __name__ == '__main__':
