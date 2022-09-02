@@ -24,4 +24,3 @@ for k, v in car.items():
     print("{} = {}".format(k, v))
 
 x = car.keys()
-print(x[0])
