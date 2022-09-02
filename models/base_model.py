@@ -33,7 +33,8 @@ class BaseModel:
 
     def __str__(self):
         """Return the print() and str() representation the basemodel."""
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         """updates the updated_at with the current datetime."""

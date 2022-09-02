@@ -47,6 +47,7 @@ class HBNBCommand(cmd.Cmd):
         Eliminates empty lines
         """
         pass
+
     def do_create(self, line):
         """Creates a new instance of @cls_name class,
         and prints the new instance's ID.
@@ -71,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         obj = eval(args[0])()
         obj.save()
         print(obj.id)
-    
+
     def do_show(self, line):
         """Prints a string representation of an instance.
 
@@ -87,10 +88,10 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return False
-        elif  len(args) != 2:
+        elif len(args) != 2:
             print("** instance id missing **")
             return False
-        
+
         all_objs = storage.all()
         for obj_id in all_objs.keys():
             if obj_id == args[0]+'.'+args[1]:
@@ -98,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj)
                 return False
         print('** no instance found **')
-    
+
     def do_create(self, line):
         """Creates a new instance of @cls_name class,
         and prints the new instance's ID.
@@ -123,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         obj = eval(args[0])()
         obj.save()
         print(obj.id)
-    
+
     def do_destroy(self, line):
         """Prints a string representation of an instance.
 
@@ -139,10 +140,10 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return False
-        elif  len(args) != 2:
+        elif len(args) != 2:
             print("** instance id missing **")
             return False
-        
+
         all_objs = storage.all()
         for obj_id in all_objs.keys():
             if obj_id == args[0]+'.'+args[1]:
@@ -150,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
                 return False
         print('** no instance found **')
-    
+
     def do_all(self, line):
         """Prints a string representation of all instance.
 
@@ -166,13 +167,13 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return False
-        
+
         all_objs = storage.all()
         lis = []
         for obj_id in all_objs.keys():
             lis.append(str(all_objs[obj_id]))
         print(lis)
-    
+
     def do_update(self, line):
         """Updates an instance based on the class name
         and id by adding or updating an attribute
@@ -184,8 +185,7 @@ class HBNBCommand(cmd.Cmd):
 
         """
         pass
-    
-            
+
 
 if __name__ == '__main__':
     cli = HBNBCommand()
