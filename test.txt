@@ -1,4 +1,0 @@
-{"BaseModel.[BaseModel] (82ae9122-683e-40a7-b3c6-261c4510eb02) {'id': '82ae9122-683e-40a7-b3c6-261c4510eb02', 'created_at': 
-datetime.datetime(2022, 9, 2, 17, 12, 16, 116075), 'updated_at': datetime.datetime(2022, 9, 2, 17, 12, 16, 116075)}" : 
-{"id": "82ae9122-683e-40a7-b3c6-261c4510eb02", "created_at": "2022-09-02T17:12:16.116075", "updated_at": "2022-09-02T17:12:16.116075",
- "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"}}

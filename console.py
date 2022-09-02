@@ -174,6 +174,15 @@ class HBNBCommand(cmd.Cmd):
         print(lis)
     
     def do_update(self, line):
+        """Updates an instance based on the class name
+        and id by adding or updating an attribute
+
+        Args:
+            line(args): receives the commands:
+            <class name> <id> <attribute name> "<attribute value>"
+            Example: 'update User 1234-1234-1234 my_name "Bob"'
+
+        """
         pass
     
             
