@@ -5,6 +5,7 @@ Contains the entry point of the command interpreter
 """
 import cmd
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -88,6 +89,14 @@ class HBNBCommand(cmd.Cmd):
         elif  len(args) != 2:
             print("** instance id missing **")
             return False
+        
+        args = line.split()
+        d = storage.all()
+        if args[1][0] == '"':
+            args[1] = args[1].replace('"', "")
+        key = args[0] + '.' + args[1]
+        print(d[key])
+            
 
 if __name__ == '__main__':
     cli = HBNBCommand()
