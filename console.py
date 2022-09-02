@@ -10,9 +10,9 @@ class HBNBCommand(cmd.Cmd):
     """
     custom console class
     """
-    
+
     prompt = '(hbnb) '
-    
+
     def do_quit(self, line):
         """Handles the 'quit' command
 
@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
 
         """
         return True
-    
+
     def help_quit(self):
         """
         Help instructions for the quit command
@@ -38,13 +38,14 @@ class HBNBCommand(cmd.Cmd):
 
         """
         return True
+
     def emptyline(self):
         """
         Eliminates empty lines
         """
         pass
-    
+
+
 if __name__ == '__main__':
     cli = HBNBCommand()
     cli.cmdloop()
-    
