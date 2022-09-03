@@ -22,7 +22,9 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    classes = ['BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review']
+    classes = [
+        'BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review'
+        ]
 
     def do_quit(self, line):
         """Handles the 'quit' command
