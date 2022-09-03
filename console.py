@@ -140,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] != "BaseModel":
             print("** class doesn't exist **")
             return False
-        elif len(args) != 2:
+        elif len(args) < 2:
             print("** instance id missing **")
             return False
 
@@ -184,7 +184,49 @@ class HBNBCommand(cmd.Cmd):
             Example: 'update User 1234-1234-1234 my_name "Bob"'
 
         """
-        pass
+        args = line.split(" ")
+        if not line:
+            print('** class name missing **')
+            return False
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        elif len(args) < 2:
+            print("** instance id missing **")
+            return False
+        elif len(args) < 3:
+            print('** attribute name missing **')
+            return False
+        elif len(args) < 4:
+            print('** value missing **')
+            return False
+
+        all_objs = storage.all()
+        attr_k = args[2]
+        attr_v = args[3]
+        sp = attr_v.split('"')
+        try:
+            if attr_v.isdigit():
+                attr_v = int(attr_v)
+            elif float(attr_v):
+                attr_v = float(attr_v)
+        except ValueError:
+            pass
+        if isinstance(attr_v, str):
+            if len(sp) < 2:
+                return False
+            for obj_id in all_objs.keys():
+                if obj_id == args[0]+'.'+args[1]:
+                    setattr(all_objs[obj_id], attr_k, sp[1])
+                    storage.save()
+                    return False
+        if isinstance(attr_v, int) or isinstance(attr_v, float):
+            for obj_id in all_objs.keys():
+                if obj_id == args[0]+'.'+args[1]:
+                    setattr(all_objs[obj_id], attr_k, attr_v)
+                    storage.save()
+                    return False
+        print('** no instance found **')
 
 
 if __name__ == '__main__':
