@@ -1,1 +1,1 @@
-{"User.1916edb0-bd87-4e9b-80a5-f1d3755386a8": {"id": "1916edb0-bd87-4e9b-80a5-f1d3755386a8", "created_at": "2022-09-04T00:22:44.367581", "updated_at": "2022-09-04T00:22:44.392723", "__class__": "User"}}
+{"User.e87db72b-5c94-4dd6-b417-e3e0b04cc9ff": {"id": "e87db72b-5c94-4dd6-b417-e3e0b04cc9ff", "created_at": "2022-09-04T01:11:48.910388", "updated_at": "2022-09-04T01:12:37.525418", "first_name": "John", "age": 89, "__class__": "User"}}
