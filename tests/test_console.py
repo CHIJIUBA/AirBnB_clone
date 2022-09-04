@@ -76,7 +76,7 @@ class TestConsoleDocs(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("User.count()"))
             self.assertEqual("1", f.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as f:
-                self.assertFalse(HBNBCommand().onecmd("create State"))
+            self.assertFalse(HBNBCommand().onecmd("create State"))
         with patch("sys.stdout", new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("State.count()"))
             self.assertEqual("1", f.getvalue().strip())
@@ -234,10 +234,6 @@ class TestConsoleDocs(unittest.TestCase):
             self.assertIn("City", f.getvalue().strip())
             self.assertNotIn("BaseModel", f.getvalue().strip())
 
-#        def test_update(self):
-#
-#        def test_update_notation(self):
-#
 
 if __name__ == "__main__":
     unittest.main()
