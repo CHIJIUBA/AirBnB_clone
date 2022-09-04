@@ -58,6 +58,7 @@ class HBNBCommand(cmd.Cmd):
             the terminal
 
         """
+        print()
         return True
 
     def emptyline(self):
