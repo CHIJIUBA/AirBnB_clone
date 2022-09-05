@@ -76,7 +76,7 @@ class TestConsoleDocs(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("User.count()"))
             self.assertEqual("1", f.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as f:
-                self.assertFalse(HBNBCommand().onecmd("create State"))
+            self.assertFalse(HBNBCommand().onecmd("create State"))
         with patch("sys.stdout", new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("State.count()"))
             self.assertEqual("1", f.getvalue().strip())
@@ -188,7 +188,36 @@ class TestConsoleDocs(unittest.TestCase):
 
 #        def test_destroy(self):
 #
-#        def test_destroy_notation(self):
+    def test_destroy_notation(self):
+        """Test show with dot notation"""
+        msg = "** instance id missing **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.destroy()")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.destroy()")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** no instance found **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.destroy(6767)")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("delete User 35353")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** no instance found **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.destroy(4544)")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.destroy(5667)")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** class name missing **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("destroy")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("destroy")
+        self.assertEqual(msg, f.getvalue().strip())
 
     def test_all(self):
         """Test all with space"""
@@ -242,6 +271,7 @@ class TestConsoleDocs(unittest.TestCase):
 #
 #        def test_update_notation(self):
 #
+
 
 if __name__ == "__main__":
     unittest.main()
