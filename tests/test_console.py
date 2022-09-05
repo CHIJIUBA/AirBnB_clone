@@ -269,8 +269,36 @@ class TestConsoleDocs(unittest.TestCase):
 
 #        def test_update(self):
 #
-#        def test_update_notation(self):
-#
+    def test_update_notation(self):
+        """Test show with dot notation"""
+        msg = "** instance id missing **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.update()")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.update()")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** no instance found **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.update(6767)")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update User 35353")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** no instance found **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.update(4544)")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.update(5667)")
+        self.assertEqual(msg, f.getvalue().strip())
+        msg = "** class name missing **"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update")
+        self.assertEqual(msg, f.getvalue().strip())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update")
+        self.assertEqual(msg, f.getvalue().strip())
 
 
 if __name__ == "__main__":
